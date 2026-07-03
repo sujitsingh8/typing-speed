@@ -118,9 +118,3 @@ The "5 characters = 1 word" standard is used, which matches how most typing test
 | below | below | Keep practicing. You will improve! |
 
 ---
-
-## Architecture Notes
-
-- **`engine.py`** holds the platform-specific keyboard reader and the character-by-character input loop. Every keystroke triggers a full redraw of the input line with colour-coding applied based on comparison with the target passage.
-- **`modes.py`** wraps the engine for each game mode. Timed mode runs a background thread that updates a live clock in the terminal header using ANSI cursor-save/restore escape codes (`\0337` / `\0338`), so the countdown updates without disturbing what the user is typing.
-- **`config.py`** stores a ~90-entry sentence bank (mix of famous quotes, proverbs, and facts) plus a random character generator. A `used` set prevents immediate repetition of sentences within a single timed session.
