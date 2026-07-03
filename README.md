@@ -1,10 +1,10 @@
-# ⌨️ Typing Speed & Accuracy Test
+# Typing Speed & Accuracy Test
 
 A feature-rich terminal typing test built in Python. Practise your speed and accuracy with live colour-coded feedback, a timed race mode, and detailed performance breakdowns — all in pure standard library.
 
 ---
 
-## 📸 Demo
+## Demo
 
 **Timed mode in action:**
 ```
@@ -39,7 +39,7 @@ A feature-rich terminal typing test built in Python. Practise your speed and acc
 
 ---
 
-## ✨ Features
+## Features
 
 - **Two modes** — Timed (race against the clock) and Free (no time pressure)
 - **Six time presets** in timed mode — 15s, 30s, 60s, 2min, 5min, 10min
@@ -54,7 +54,7 @@ A feature-rich terminal typing test built in Python. Practise your speed and acc
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 typing-speed-test/
@@ -67,7 +67,7 @@ typing-speed-test/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 **Requirements:** Python 3.7+, no external libraries needed.
 
@@ -84,7 +84,7 @@ python main.py
 
 ---
 
-## 🎮 Controls
+## Controls
 
 | Key | Action |
 |---|---|
@@ -96,7 +96,7 @@ python main.py
 
 ---
 
-## 📊 How Metrics Are Calculated
+## How Metrics Are Calculated
 
 | Metric | Formula |
 |---|---|
@@ -108,7 +108,7 @@ The "5 characters = 1 word" standard is used, which matches how most typing test
 
 ---
 
-## 🏆 Grading Thresholds
+## Grading Thresholds
 
 | WPM | Accuracy | Feedback |
 |---|---|---|
@@ -119,7 +119,7 @@ The "5 characters = 1 word" standard is used, which matches how most typing test
 
 ---
 
-## 🧩 Architecture Notes
+## Architecture Notes
 
 - **`engine.py`** holds the platform-specific keyboard reader and the character-by-character input loop. Every keystroke triggers a full redraw of the input line with colour-coding applied based on comparison with the target passage.
 - **`modes.py`** wraps the engine for each game mode. Timed mode runs a background thread that updates a live clock in the terminal header using ANSI cursor-save/restore escape codes (`\0337` / `\0338`), so the countdown updates without disturbing what the user is typing.
