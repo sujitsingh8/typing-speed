@@ -1,67 +1,59 @@
-import time
-from settings import UP, DOWN, LEFT, RIGHT
-from models   import Snake, Food
-from ui       import get_key, draw, show_menu, show_game_over
+from modes import free_mode, timed_mode
 
-# Key - Direction mapping
-KEY_MAP = {
-    "w": UP,
-    "s": DOWN,
-    "a": LEFT,
-    "d": RIGHT,
-}
+def header():
+    print("=" * 50)
+    print("       TYPING SPEED AND ACCURACY TEST")
+    print("=" * 50)
 
-
-def run_game(delay, level, high_score):
-    snake = Snake()
-    food  = Food(snake.body)
-    score = 0
-
+def pick_option(prompt, options):
     while True:
-
-        # 1. Input
-        key = get_key()
-        if key == "q":
-            break
-        if key in KEY_MAP:
-            snake.change_direction(KEY_MAP[key])
-
-        # 2. Move
-        snake.move()
-
-        # 3. Food
-        if snake.body[0] == food.position:
-            snake.eat()
-            food.respawn(snake.body)
-            score += 10
-            if score > high_score:
-                high_score = score
-
-        # 4. Collisions
-        if snake.hit_wall() or snake.hit_self():
-            break
-
-        # 5. Draw
-        draw(snake, food, score, high_score, level)
-
-        # 6. Wait
-        time.sleep(delay)
-
-    return score, high_score
-
+        print(prompt)
+        for key in options:
+            print(f"  {key}. {options[key]}")
+        choice = input("\nEnter choice: ").strip()
+        if choice in options:
+            return choice
+        print("  Invalid choice. Try again.\n")
 
 def main():
-    high_score = 0
-
     while True:
-        delay, level      = show_menu()
-        score, high_score = run_game(delay, level, high_score)
-        play_again        = show_game_over(score, high_score)
+        print()
+        header()
 
-        if not play_again:
-            print("\n  Thanks for playing! 🐍\n")
+        mode = pick_option(
+            "\nSelect Mode:",
+            {"1": "Timed Mode (race against the clock)",
+             "2": "Free Mode (no time limit)"}
+        )
+
+        time_limit = None
+        if mode == "1":
+            t = pick_option(
+                "\nSelect Time Limit:",
+                {"1": "15 seconds", "2": "30 seconds", "3": "60 seconds",
+                 "4": "2 minutes",  "5": "5 minutes",  "6": "10 minutes"}
+            )
+            time_limit = {"1": 15, "2": 30, "3": 60,
+                          "4": 120, "5": 300, "6": 600}[t]
+
+        content_mode = pick_option(
+            "\nSelect Content Type:",
+            {"1": "Random Sentences", "2": "Random Characters"}
+        )
+
+        input("\nPress Enter when ready...")
+
+        if mode == "1":
+            result = timed_mode(time_limit, content_mode)
+        else:
+            result = free_mode(content_mode)
+
+        if not result:
             break
 
+        again = input("\nPlay again? (yes / no): ").strip().lower()
+        if again != "yes":
+            print("\nThanks for using the Typing Test. Goodbye!\n")
+            break
 
-if __name__ == "__main__":
-    main()
+main()
