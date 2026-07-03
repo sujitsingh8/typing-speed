@@ -3,7 +3,7 @@ from settings import UP, DOWN, LEFT, RIGHT
 from models   import Snake, Food
 from ui       import get_key, draw, show_menu, show_game_over
 
-# Key → Direction mapping
+# Key - Direction mapping
 KEY_MAP = {
     "w": UP,
     "s": DOWN,
