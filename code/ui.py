@@ -3,7 +3,7 @@ import sys
 import platform
 from settings import WIDTH, HEIGHT, EMPTY, FOOD, DELAY_EASY, DELAY_MEDIUM, DELAY_HARD
 
-# ── Keyboard input setup (depends on OS) ──────────────────────────────────
+# Keyboard input setup (depends on OS)
 
 ON_WINDOWS = platform.system() == "Windows"
 
@@ -33,7 +33,7 @@ def get_key():
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
 
-# ── Screen utilities ───────────────────────────────────────────────────────
+# Screen utilities
 
 def clear():
     """Clear the terminal screen."""
@@ -72,14 +72,14 @@ def draw(snake, food, score, high_score, level):
     print("\n".join(lines))
 
 
-# ── Menu & Game Over screens ───────────────────────────────────────────────
+# Menu & Game Over screens
 
 def show_menu():
     """Show the main menu. Returns (delay, level_name)."""
     clear()
     print("""
   ╔══════════════════════════════╗
-  ║        🐍  SNAKE  🐍        ║
+  ║             SNAKE            ║
   ║       Terminal Edition       ║
   ╚══════════════════════════════╝
 
